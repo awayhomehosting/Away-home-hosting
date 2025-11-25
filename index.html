@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WhileAway – Your home earns while you’re away</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="WhileAway turns your empty Melbourne home into a fully managed short-stay rental while you’re away – staging, hosting, cleaning and guest support." />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --blue: #1f6fb5;
+      --blue-soft: #e7f1fb;
+      --dark: #101821;
+      --text: #1e2833;
+      --muted: #6b7280;
+      --bg: #f5f5f7;
+      --white: #ffffff;
+      --radius-lg: 18px;
+      --radius-full: 999px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Layout */
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      position: sticky;
+      top: 0.75rem;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-house {
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      border: 2.2px solid #ffffff;
+      border-bottom-width: 3px;
+      position: relative;
+      transform: translateY(1px) rotate(0deg);
+    }
+
+    .logo-house::before {
+      content: "";
+      position: absolute;
+      inset: -7px 3px auto 3px;
+      border-top: 2.2px solid #ffffff;
+      transform: skewY(-35deg);
+      border-radius: 4px 4px 0 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-weight: 650;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-tagline {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    nav a {
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      color: var(--muted);
+    }
+
+    nav a:hover {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.35);
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      background: #17548a;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.35);
+    }
+
+    main {
+      margin-top: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+    }
+
+    section {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 2rem 1.75rem;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+    }
+
+    /* Hero */
+    #hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: var(--blue-soft);
+      color: var(--blue);
+      margin-bottom: 0.75rem;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.25);
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 3vw, 2.6rem);
+      line-height: 1.1;
+      margin-bottom: 0.85rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 0.97rem;
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: center;
+      margin-bottom: 1.3rem;
+    }
+
+    .btn-secondary {
+      padding: 0.5rem 0.9rem;
+      border-radius: var(--radius-full);
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      font-size: 0.85rem;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-note strong {
+      color: var(--text);
+    }
+
+    .hero-card {
+      border-radius: 20px;
+      background: radial-gradient(circle at top left, #e7f3ff, #ffffff 40%, #f9fafb);
+      padding: 1.4rem 1.4rem 1.6rem;
+      border: 1px solid #e5e7eb;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-steps {
+      display: grid;
+      gap: 0.75rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.86rem;
+    }
+
+    .hero-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+    }
+
+    .step-number {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--blue);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 1.4rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    /* Sections */
+    .section-title {
+      font-size: 1.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-intro {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1.35rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.1rem;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      border-radius: 18px;
+      border: 1px solid #e5e7eb;
+      padding: 1rem;
+      background: #f9fafb;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .card p {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      background: #eef2ff;
+      color: #4f46e5;
+      margin-bottom: 0.6rem;
+    }
+
+    .check {
+      font-size: 1rem;
+      color: #22c55e;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .list-check li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.45rem;
+      font-size: 0.86rem;
+      margin-bottom: 0.35rem;
+      color: var(--muted);
+    }
+
+    .list-check span.icon {
+      color: #22c55e;
+      margin-top: 0.05rem;
+    }
+
+    /* FAQ */
+    .faq-item {
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      padding: 0.8rem 0.9rem;
+      background: #f9fafb;
+    }
+
+    .faq-q {
+      font-weight: 560;
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-a {
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    /* Contact */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    form {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      background: #f9fafb;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--blue);
+      background: #ffffff;
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .contact-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+
+    .contact-side {
+      font-size: 0.86rem;
+      color: var(--muted);
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .contact-side strong {
+      color: var(--text);
+    }
+
+    footer {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    footer a {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      #hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .contact-layout,
+      .grid-3,
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      section {
+        padding: 1.6rem 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="logo-circle">
+          <!-- Simple inline “house” icon -->
+          <div class="logo-house"></div>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">WhileAway</span>
+          <span class="brand-tagline">Your home earns while you’re away</span>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#how-it-works">How it works</a>
+        <a href="#services">Services</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="btn-primary">Free property check</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section id="hero">
+        <div>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            Melbourne-based short-stay management
+          </div>
+
+          <h1>Your home earns while you’re on holiday.</h1>
+          <p class="hero-subtitle">
+            WhileAway turns your empty home into a fully managed short-stay rental while you’re away –
+            staging, listing, guest messaging and cleaning handled for you.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contact" class="btn-primary">Get a free earning estimate</a>
+            <button class="btn-secondary" type="button" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">
+              See how it works
+            </button>
+          </div>
+
+          <p class="hero-note">
+            <strong>No set-up fee.</strong> You only pay a percentage when your place is booked.
+          </p>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-label">What we do while you’re away</div>
+          <div class="hero-steps">
+            <div class="hero-step">
+              <div class="step-number">1</div>
+              <div>Visit your home, plan the setup and help with light staging so it looks great in photos.</div>
+            </div>
+            <div class="hero-step">
+              <div class="step-number">2</div>
+              <div>Create your listing, manage bookings, screen guests and handle all communication.</div>
+            </div>
+            <div class="hero-step">
+              <div class="step-number">3</div>
+              <div>Arrange cleans, linen and checks between stays – you return to a clean, locked-up home.</div>
+            </div>
+          </div>
+
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <strong>Melbourne based</strong>
+              Inner suburbs + nearby areas
+            </div>
+            <div class="hero-stat">
+              <strong>Hands-on service</strong>
+              Run locally by Charlie
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section id="how-it-works">
+        <h2 class="section-title">How WhileAway works</h2>
+        <p class="section-intro">
+          Simple, transparent and designed so you can focus on your trip – not your guests.
+        </p>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <div class="chip">Step 1</div>
+            <h3>Free home &amp; earnings check</h3>
+            <p>
+              We visit your place (or do a video walk-through), talk through dates you’re away, and estimate
+              what your home could earn as a short-stay.
+            </p>
+          </div>
+          <div class="card">
+            <div class="chip">Step 2</div>
+            <h3>Set-up &amp; listing</h3>
+            <p>
+              We help with light staging, photos and listing creation. We handle pricing, rules and guest
+              info so everything’s clear and stress-free.
+            </p>
+          </div>
+          <div class="card">
+            <div class="chip">Step 3</div>
+            <h3>Hosting, cleaning &amp; payouts</h3>
+            <p>
+              We manage messages, keys, cleans and checks between guests. You receive payouts for the nights
+              booked, minus our agreed management fee.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICES -->
+      <section id="services">
+        <h2 class="section-title">What we handle for you</h2>
+        <p class="section-intro">
+          WhileAway is a full-service, while-you’re-away hosting partner. You choose the dates, we do the rest.
+        </p>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Listing &amp; pricing</h3>
+            <p>
+              We write your listing, upload photos and set pricing that balances occupancy and earnings for
+              your area and your dates.
+            </p>
+            <ul class="list-check" style="margin-top:0.6rem;">
+              <li><span class="icon">✔</span><span>Platform setup and optimisation</span></li>
+              <li><span class="icon">✔</span><span>Calendar &amp; minimum stay settings</span></li>
+              <li><span class="icon">✔</span><span>House rules and guest info pack</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Guest communication</h3>
+            <p>
+              We handle all messages, questions and check-in instructions from enquiry to checkout, so you
+              don’t have to be on your phone while travelling.
+            </p>
+            <ul class="list-check" style="margin-top:0.6rem;">
+              <li><span class="icon">✔</span><span>Pre-arrival screening &amp; info</span></li>
+              <li><span class="icon">✔</span><span>Check-in and key handover support</span></li>
+              <li><span class="icon">✔</span><span>Issue handling during the stay</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Cleaning &amp; home care</h3>
+            <p>
+              Between guests, your place is cleaned, checked and reset to your agreed standard – so you walk
+              back into a fresh home.
+            </p>
+            <ul class="list-check" style="margin-top:0.6rem;">
+              <li><span class="icon">✔</span><span>Trusted cleaners &amp; linen options</span></li>
+              <li><span class="icon">✔</span><span>Basic restocking (toilet paper, soap, etc.)</span></li>
+              <li><span class="icon">✔</span><span>Property check after final stay</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Local, hands-on support</h3>
+            <p>
+              WhileAway is run locally in Melbourne – not a faceless call centre. You’ll know who has your
+              keys and who’s in your home.
+            </p>
+            <ul class="list-check" style="margin-top:0.6rem;">
+              <li><span class="icon">✔</span><span>Inner Melbourne &amp; nearby suburbs</span></li>
+              <li><span class="icon">✔</span><span>In-person walk-through before first stay</span></li>
+              <li><span class="icon">✔</span><span>Clear, simple agreement and fee</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq">
+        <h2 class="section-title">Questions people usually ask</h2>
+        <p class="section-intro">
+          Here are the basics. We’ll walk through the details for your home during the free property check.
+        </p>
+
+        <div class="grid">
+          <div class="faq-item">
+            <div class="faq-q">How much can my home earn while I’m away?</div>
+            <div class="faq-a">
+              It depends on your location, size and dates. During your free check we’ll give you a rough
+              estimate based on similar properties and realistic occupancy – not inflated “best case” numbers.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Is there a set-up cost?</div>
+            <div class="faq-a">
+              There’s no fee just to chat or get an estimate. If your home is suitable and you decide to list,
+              we work on a percentage of each booking. You only pay when guests actually stay.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Who is this best suited for?</div>
+            <div class="faq-a">
+              Homeowners or long-term renters in Melbourne who are away for stretches of time – holidays,
+              work trips or staying elsewhere – and want their place to earn instead of sitting empty.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">What happens to my belongings?</div>
+            <div class="faq-a">
+              We’ll help you decide what stays, what’s locked away and what should be stored. Certain cupboards
+              or rooms can remain locked and off-limits to guests.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Can I choose the dates it’s available?</div>
+            <div class="faq-a">
+              Absolutely. You control the calendar. We only open the dates you’re comfortable with, and you can
+              always block out dates you want your home back.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Where do you operate?</div>
+            <div class="faq-a">
+              We’re based in Melbourne and currently focus on inner-city and nearby suburbs. If you’re not
+              sure whether your place is in range, just ask during the enquiry.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <h2 class="section-title">Get a free property check</h2>
+        <p class="section-intro">
+          No pressure, no lock-in. Tell us a bit about your place and when you’re away, and we’ll let you know
+          if it’s a good fit and what it could roughly earn.
+        </p>
+
+        <div class="contact-layout">
+          <div>
+            <!-- 
+              Replace the action with your form handler (e.g. Formspree) 
+              or leave as mailto for now.
+            -->
+            <form action="mailto:youremail@example.com" method="post" enctype="text/plain">
+              <div>
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" required />
+              </div>
+
+              <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required />
+              </div>
+
+              <div>
+                <label for="suburb">Suburb</label>
+                <input id="suburb" name="suburb" type="text" placeholder="e.g. Richmond" />
+              </div>
+
+              <div>
+                <label for="dates">Rough dates you’re away</label>
+                <input id="dates" name="dates" type="text" placeholder="e.g. 10 June – 5 July" />
+              </div>
+
+              <div>
+                <label for="message">Anything else we should know?</label>
+                <textarea id="message" name="message" placeholder="Type a quick note about your home, bedrooms, parking, etc."></textarea>
+              </div>
+
+              <button class="btn-primary" type="submit">Send enquiry</button>
+              <div class="contact-note">
+                Prefer email? Reach out directly at 
+                <!-- replace with your email -->
+                <a href="mailto:youremail@example.com">youremail@example.com</a>.
+              </div>
+            </form>
+          </div>
+
+          <div class="contact-side">
+            <p>
+              <strong>Run locally by Charlie</strong><br />
+              WhileAway is a small, hands-on service. You’ll know exactly who you’re dealing with and who has
+              access to your home.
+            </p>
+            <p>
+              <strong>What happens after you submit the form?</strong><br />
+              We’ll reply with a few follow-up questions, and if it looks like a good fit, we’ll book a quick
+              call or walk-through to talk through details and next steps.
+            </p>
+            <p>
+              <strong>No obligation, ever.</strong><br />
+              If it doesn’t feel right for you or your home, no hard feelings – at least you’ll know your
+              options for next time you’re away.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        © <span id="year"></span> WhileAway. Built with care in Melbourne.  
+        <!-- Optional: add your Instagram -->
+        · Find us on <a href="https://instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Auto-set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
